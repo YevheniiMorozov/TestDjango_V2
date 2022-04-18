@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="row">
+    {% for item in news %}
+    <a href="">+</a> {{item.approve_count}} <a href="">-</a> approves
+    <div class="card mb-3">
+        <div class="card-body">
+            <a href={{item.content}} class="card-link">{{item.title}}</a>
+        </div>
+        <div class="card-footer text-muted">
+            {{item.author}}
+            {{ item.date_create|date:"Y-m-d H:i:s" }}
+            <a href="{{ item.get_absolute_url }}}"> comments {{comments.count}} </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

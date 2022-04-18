@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="card mb-3">
+        <div class="card-body">
+            <a href={{item.content}} class="card-link">{{news.title}}</a>
+        </div>
+        <div class="card-footer text-muted">
+            {{news.author}}
+            {{ news.date_create|date:"Y-m-d H:i:s" }}
+        </div>
+    </div>
+
+    <form action="{% url 'comments' %}" method="post">
+        {% csrf_token %}
+        <h5>Add comment</h5>
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-block">login</button>
+    </form>
+
+</div>
+{% for item in comments %}
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="media-body">
+            <h5 class="card-title">{{ item.user }}</h5>
+            <p class="card-text">{{ item.body }}</p>
+        </div>
+    </div>
+</div>
+<div class="card-footer text-muted">
+    {{ item.created|date:"Y-m-d H:i:s" }}
+</div>
+</div>
+{% endfor %}
+{% endblock %}
